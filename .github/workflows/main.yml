@@ -83,7 +83,7 @@ jobs:
         tar zxvf "$GITHUB_WORKSPACE/XG-040G-MD.tar.gz" -C /workdir/openwrt
 
     - name: Enable build ccache
-      uses: klever1988/cachewrtbuild@d4cc5a29329d87f7b8e16c6c3d58f3a58e50e43f
+      uses: klever1988/cachewrtbuild@b729f807837dbc3455d02fd35192660d9b662121
       # ^ verify at github.com/klever1988/cachewrtbuild/commits
       with:
         ccache: 'true'
@@ -112,7 +112,7 @@ jobs:
         bash "$GITHUB_WORKSPACE/$DIY_P2_SH"
 
     - name: SSH connection to Actions
-      uses: P3TERX/ssh2actions@8d70cb1f00f05e58a64789fac65c88b04d66cb76
+      uses: P3TERX/ssh2actions@71006b93bff498b020448ac10964f8a5d0f9f32c
       # ^ v1.0.0 pinned to SHA
       if: github.event.inputs.ssh == 'true'
       env:
@@ -144,7 +144,7 @@ jobs:
       run: df -hT
 
     - name: Upload bin directory
-      uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
       # ^ actions/upload-artifact v4.6.2
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
@@ -161,7 +161,7 @@ jobs:
         echo "status=success" >> $GITHUB_OUTPUT
 
     - name: Upload firmware directory
-      uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
       # ^ actions/upload-artifact v4.6.2
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
@@ -177,7 +177,7 @@ jobs:
         echo "status=success" >> $GITHUB_OUTPUT
 
     - name: Upload firmware to release
-      uses: softprops/action-gh-release@da05d552573ad5aba039eaac05058a918a7a20d8
+      uses: softprops/action-gh-release@b25b93d384199fc0fc8c2e126b2d937a0cbeb2ae
       # ^ softprops/action-gh-release v2.2.2
       if: steps.tag.outputs.status == 'success' && !cancelled()
       env:
@@ -194,7 +194,7 @@ jobs:
         keep_minimum_runs: 3
 
     - name: Remove old Releases
-      uses: dev-drprasad/delete-older-releases@v0.3.4
+      uses: dev-drprasad/delete-older-releases@dfbe6be2a006e9475dfcbe5b8d201f1824c2a9fe
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       with:
         keep_latest: 5
