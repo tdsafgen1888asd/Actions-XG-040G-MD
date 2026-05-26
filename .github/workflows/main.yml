@@ -83,7 +83,7 @@ jobs:
         tar zxvf "$GITHUB_WORKSPACE/XG-040G-MD.tar.gz" -C /workdir/openwrt
 
     - name: Enable build ccache
-      klever1988/cachewrtbuild@d4cc5a29329d87f7b8e16c6c3d58f3a58e50e43f
+      uses: klever1988/cachewrtbuild@d4cc5a29329d87f7b8e16c6c3d58f3a58e50e43f
       # ^ verify at github.com/klever1988/cachewrtbuild/commits
       with:
         ccache: 'true'
